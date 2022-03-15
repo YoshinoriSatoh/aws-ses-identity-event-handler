@@ -2,6 +2,7 @@ package notification
 
 import (
 	"fmt"
+	"os"
 
 	"github.com/slack-go/slack"
 )
@@ -39,7 +40,8 @@ func NotifyEventSlack(eventType, message, emailAddress string) error {
 		slack.NewSectionBlock(
 			&slack.TextBlockObject{
 				Type: "mrkdwn",
-				Text: fmt.Sprintf("*SES Event Notification*\n  EventType: %s\n  EmailAddress: %s\n  Message: %s", eventType, emailAddress, message),
+				Text: fmt.Sprintf("*SES Event Notification*\n  EventHandlerFunc: %s\n  EventType: %s\n  EmailAddress: %s\n  Message: %s",
+					os.Getenv("AWS_LAMBDA_FUNCTION_NAME"), eventType, emailAddress, message),
 			},
 			nil,
 			nil,
