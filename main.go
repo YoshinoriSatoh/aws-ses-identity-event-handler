@@ -50,7 +50,9 @@ func main() {
 	if err != nil {
 		log.Fatalf("%v", err)
 	}
-	err = notification.Init(slackBotToken, channelName)
+
+	var envName = os.Getenv("ENV_NAME")
+	err = notification.Init(slackBotToken, channelName, envName)
 	if err != nil {
 		log.Fatalf("%v", err)
 	}
